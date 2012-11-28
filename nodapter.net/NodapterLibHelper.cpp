@@ -8,22 +8,30 @@ using namespace System::Runtime::InteropServices;
 using namespace System::Reflection;
 using namespace Nodapter::Core;
 
-// we need to look for the assembly in the current directory
-// node will search for it next to the node.exe binary
-System::Reflection::Assembly ^OnAssemblyResolve(System::Object ^obj, System::ResolveEventArgs ^args)
+System::Reflection::Assembly ^LoadAssemblyFromNames(System::String ^assemblyName, array<System::String^>^ assemblies)
 {
-   System::String ^path = System::Environment::CurrentDirectory;
-   array<System::String^>^ assemblies =
-      System::IO::Directory::GetFiles(
-         System::IO::Path::GetDirectoryName(System::Reflection::Assembly::GetExecutingAssembly()->Location),
-         "*.dll");
    for (long ii = 0; ii < assemblies->Length; ii++) {
       AssemblyName ^name = AssemblyName::GetAssemblyName(assemblies[ii]);
-      if (AssemblyName::ReferenceMatchesDefinition(gcnew AssemblyName(args->Name), name)) {
+      if (AssemblyName::ReferenceMatchesDefinition(gcnew AssemblyName(assemblyName), name)) {
          return Assembly::Load(name);
       }
    }
    return nullptr;
+}
+
+System::Reflection::Assembly ^GetAssemblyFromPath(System::String ^assemblyName, System::String ^path)
+{
+   Assembly ^dll = LoadAssemblyFromNames(assemblyName, System::IO::Directory::GetFiles(path, "*.dll"));
+   return dll ? dll : LoadAssemblyFromNames(assemblyName, System::IO::Directory::GetFiles(path, "*.exe"));
+}
+
+// we need to look for the assembly in the current directory
+// node will search for it next to the node.exe binary
+System::Reflection::Assembly ^OnAssemblyResolve(System::Object ^obj, System::ResolveEventArgs ^args)
+{
+   System::String ^nodapterDir = System::IO::Path::GetDirectoryName(System::Reflection::Assembly::GetExecutingAssembly()->Location);
+   Assembly ^assem = GetAssemblyFromPath(args->Name, nodapterDir);
+   return assem ? assem : GetAssemblyFromPath(args->Name, System::Environment::CurrentDirectory);
 }
 
 // register a custom assembly load handler
