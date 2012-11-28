@@ -11,3 +11,4 @@ nodapter.net.opensdf
 *.node
 *.dll
 *.pdb
+npm-debug.log
