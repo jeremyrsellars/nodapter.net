@@ -44,6 +44,7 @@
     <Compile Include="CommandParser.cs" />
     <Compile Include="CommandRouteInterpretter.cs" />
     <Compile Include="Commands\AddAsyncRouteWork.cs" />
+    <Compile Include="Commands\ChecksumWork.cs" />
     <Compile Include="Commands\GCCollectWork.cs" />
     <Compile Include="IWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
