@@ -8,3 +8,6 @@ nodapter.net.opensdf
 *.*scc
 *[Ss]uo
 *.sdf
+*.node
+*.dll
+*.pdb

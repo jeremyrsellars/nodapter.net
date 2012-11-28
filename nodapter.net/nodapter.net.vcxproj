@@ -87,6 +87,50 @@
       <AdditionalDependencies>
       </AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>set config=$(ConfigurationName)
+set assem=$(TargetName)
+set outPath=$(SolutionDir)
+set rndFile=%time:~0,2%.%time:~3,2%.%time:~6%
+
+pushd $(ProjectDir)
+echo OutPath: %outPath%
+echo TargetDir: $(TargetDir)
+
+SET EXT=$(TargetExt)
+if exist "%outPath%\%assem%%EXT%" (
+   ECHO Replacing "%outPath%\%assem%%EXT%"
+   ren "%outPath%\%assem%%EXT%" "%rndFile%_%assem%%EXT%"
+   if exist "%outPath%\%assem%%EXT%" (
+      ECHO File could not be renamed and may be locked: %outPath%\%assem%.%EXT%
+   ) else (
+      del "%outPath%\%rndFile%_%assem%%EXT%"
+      if exist "%rndFile%_%assem%%EXT%" (
+         ECHO File could not be deleted and may be locked: %rndFile%_%assem%%EXT%
+      )
+   )
+)
+ECHO about to xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+
+SET EXT=.pdb
+if exist "%outPath%\%assem%%EXT%" (
+   ECHO Replacing "%outPath%\%assem%%EXT%"
+   ren "%outPath%\%assem%%EXT%" "%rndFile%_%assem%%EXT%"
+   if exist "%outPath%\%assem%%EXT%" (
+      ECHO File could not be renamed and may be locked: %outPath%\%assem%.%EXT%
+   ) else (
+      del "%outPath%\%rndFile%_%assem%%EXT%"
+      if exist "%rndFile%_%assem%%EXT%" (
+         ECHO File could not be deleted and may be locked: %rndFile%_%assem%%EXT%
+      )
+   )
+)
+ECHO about to xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+
+popd</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="NodapterAddon.cpp">
