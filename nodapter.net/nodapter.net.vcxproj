@@ -48,15 +48,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetExt>.node</TargetExt>
-    <IncludePath>$(SolutionDir)node-v0.8.14\src;$(SolutionDir)node-v0.8.14\deps\uv\include;$(SolutionDir)node-v0.8.14\deps\v8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)node-v0.8.14\debug;$(SolutionDir)node-v0.8.14\debug\lib;$(SolutionDir)Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(NODE_HOME)\src;$(NODE_HOME)\deps\uv\include;$(NODE_HOME)\deps\v8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(NODE_HOME)\debug;$(NODE_HOME)\debug\lib;$(SolutionDir)Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)Debug</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.node</TargetExt>
-    <IncludePath>$(SolutionDir)node-v0.8.14\src;$(SolutionDir)node-v0.8.14\deps\uv\include;$(SolutionDir)node-v0.8.14\deps\v8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)node-v0.8.14\release;$(SolutionDir)node-v0.8.14\release\lib;$(SolutionDir)release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(NODE_HOME)\src;$(NODE_HOME)\deps\uv\include;$(NODE_HOME)\deps\v8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(NODE_HOME)\release;$(NODE_HOME)\release\lib;$(SolutionDir)release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)Release</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
