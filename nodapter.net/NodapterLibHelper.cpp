@@ -14,7 +14,9 @@ System::Reflection::Assembly ^OnAssemblyResolve(System::Object ^obj, System::Res
 {
    System::String ^path = System::Environment::CurrentDirectory;
    array<System::String^>^ assemblies =
-      System::IO::Directory::GetFiles(path, "*.dll");
+      System::IO::Directory::GetFiles(
+         System::IO::Path::GetDirectoryName(System::Reflection::Assembly::GetExecutingAssembly()->Location),
+         "*.dll");
    for (long ii = 0; ii < assemblies->Length; ii++) {
       AssemblyName ^name = AssemblyName::GetAssemblyName(assemblies[ii]);
       if (AssemblyName::ReferenceMatchesDefinition(gcnew AssemblyName(args->Name), name)) {

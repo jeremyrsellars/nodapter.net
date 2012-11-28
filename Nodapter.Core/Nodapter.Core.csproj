@@ -12,10 +12,6 @@
     <AssemblyName>Nodapter.Core</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -61,6 +57,8 @@
 set assem=$(TargetName)
 set outPath=$(SolutionDir)
 set rndFile=%25time:~0,2%25.%25time:~3,2%25.%25time:~6%25
+
+xcopy /y "$(TargetPath)" "$(SolutionDir)Release\"
 
 pushd $(ProjectDir)
 echo OutPath: %25outPath%25
