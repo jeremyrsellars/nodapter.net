@@ -74,14 +74,6 @@ public:
             err = static_cast<char*>(p.ToPointer());
             Marshal::FreeHGlobal(p);
          }
-         //if (exception != nullptr)
-         //{
-         //   System::IntPtr p = Marshal::StringToHGlobalAnsi(exception->Message);
-         //   err = static_cast<char*>(p.ToPointer());
-         //   Marshal::FreeHGlobal(p);
-         //}
-         //else
-         //   err = nullptr;
 
          return ok;
       }

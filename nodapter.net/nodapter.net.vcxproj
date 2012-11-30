@@ -5,9 +5,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -32,7 +40,21 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CLRSupport>true</CLRSupport>
@@ -45,7 +67,13 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -56,6 +84,13 @@
     <LibraryPath>$(NODE_HOME)\debug;$(NODE_HOME)\debug\lib;$(SolutionDir)Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)Debug</ReferencePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetExt>.node</TargetExt>
+    <IncludePath>$(NODE_HOME)\src;$(NODE_HOME)\deps\uv\include;$(NODE_HOME)\deps\v8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(NODE_HOME)\release;$(NODE_HOME)\release\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)$(Configuration)</ReferencePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.node</TargetExt>
@@ -63,7 +98,31 @@
     <LibraryPath>$(NODE_HOME)\release;$(NODE_HOME)\release\lib;$(SolutionDir)release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)Release</ReferencePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.node</TargetExt>
+    <IncludePath>$(NODE_HOME)\src;$(NODE_HOME)\deps\uv\include;$(NODE_HOME)\deps\v8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(NODE_HOME)\release;$(NODE_HOME)\release\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)$(Configuration)</ReferencePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalUsingDirectories>C:\code\jeremy.sellars\node\nodapter.net\Debug</AdditionalUsingDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /D "$(SolutionDir)\node-v0.6.18\Debug\node.exe" "$(SolutionDir)\debug\"</Command>
+      <Message>Copy node to debug folder</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -136,9 +195,66 @@ xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
 popd</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalUsingDirectories>C:\code\jeremy.sellars\node\nodapter.net\Debug</AdditionalUsingDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>set config=$(ConfigurationName)
+set assem=$(TargetName)
+set outPath=$(SolutionDir)
+set rndFile=%time:~0,2%.%time:~3,2%.%time:~6%
+
+pushd $(ProjectDir)
+echo OutPath: %outPath%
+echo TargetDir: $(TargetDir)
+
+SET EXT=$(TargetExt)
+if exist "%outPath%\%assem%%EXT%" (
+   ECHO Replacing "%outPath%\%assem%%EXT%"
+   ren "%outPath%\%assem%%EXT%" "%rndFile%_%assem%%EXT%"
+   if exist "%outPath%\%assem%%EXT%" (
+      ECHO File could not be renamed and may be locked: %outPath%\%assem%.%EXT%
+   ) else (
+      del "%outPath%\%rndFile%_%assem%%EXT%"
+      if exist "%rndFile%_%assem%%EXT%" (
+         ECHO File could not be deleted and may be locked: %rndFile%_%assem%%EXT%
+      )
+   )
+)
+ECHO about to xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+
+SET EXT=.pdb
+if exist "%outPath%\%assem%%EXT%" (
+   ECHO Replacing "%outPath%\%assem%%EXT%"
+   ren "%outPath%\%assem%%EXT%" "%rndFile%_%assem%%EXT%"
+   if exist "%outPath%\%assem%%EXT%" (
+      ECHO File could not be renamed and may be locked: %outPath%\%assem%.%EXT%
+   ) else (
+      del "%outPath%\%rndFile%_%assem%%EXT%"
+      if exist "%rndFile%_%assem%%EXT%" (
+         ECHO File could not be deleted and may be locked: %rndFile%_%assem%%EXT%
+      )
+   )
+)
+ECHO about to xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+xcopy /y /e "$(TargetDir)%assem%*%EXT%" "%outPath%"
+
+popd</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="NodapterAddon.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="NodapterLibHelper.cpp" />
   </ItemGroup>
