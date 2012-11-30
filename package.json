@@ -5,7 +5,7 @@
   "main": "nodapter.net",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall":"msbuild /p:Configuration=Release /p:Platform=Win32 & msbuild /p:Configuration=Release /p:Platform=x64"
+    "preinstall":"node install/download_node.lib.js & msbuild /p:Configuration=Release /p:Platform=Win32 & msbuild /p:Configuration=Release /p:Platform=x64"
   },
   "repository": {
     "type": "git",

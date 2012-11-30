@@ -12,3 +12,6 @@ nodapter.net.opensdf
 *.dll
 *.pdb
 npm-debug.log
+x64
+Win32
+node.lib

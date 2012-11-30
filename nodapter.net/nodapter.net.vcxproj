@@ -88,21 +88,21 @@
     <LinkIncremental>true</LinkIncremental>
     <TargetExt>.node</TargetExt>
     <IncludePath>$(NODE_HOME)\src;$(NODE_HOME)\deps\uv\include;$(NODE_HOME)\deps\v8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(NODE_HOME)\release;$(NODE_HOME)\release\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(NODE_HOME)\release;$(SolutionDir)\install\$(Platform);$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)$(Configuration)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.node</TargetExt>
     <IncludePath>$(NODE_HOME)\src;$(NODE_HOME)\deps\uv\include;$(NODE_HOME)\deps\v8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(NODE_HOME)\release;$(NODE_HOME)\release\lib;$(SolutionDir)release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)install\$(Platform);$(SolutionDir)release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)Release</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.node</TargetExt>
     <IncludePath>$(NODE_HOME)\src;$(NODE_HOME)\deps\uv\include;$(NODE_HOME)\deps\v8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(NODE_HOME)\release;$(NODE_HOME)\release\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)install\$(Platform);$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(SolutionDir)$(Configuration)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
