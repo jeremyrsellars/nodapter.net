@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall":"node install/download_node.lib.js & msbuild /p:Configuration=Release /p:Platform=Win32 & msbuild /p:Configuration=Release /p:Platform=x64"
+    "preinstall":"node install/download_node.lib.js & msbuild nodapter.net.sln /t:Nodapter_Core:Rebuild;nodapter_net:Rebuild /p:Configuration=Release /p:Platform=Win32 & msbuild nodapter.net.sln /t:Nodapter_Core:Rebuild;nodapter_net:Rebuild /p:Configuration=Release /p:Platform=x64"
   },
   "repository": {
     "type": "git",
