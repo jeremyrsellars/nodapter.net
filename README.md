@@ -89,4 +89,4 @@ npm install
 Then, build your own .net classes which implement ISyncWork and put them in the 
 current directory.  Add a route to them, then execute the work, as shown in the example.
 
-__Note:__ At the moment, this works on Windows x86, so run a 32-bit version of node.
+__Note:__ This is intended to work with either Win32 or x64, auto-detecting the processor architecture of the currently running Node.exe.  Of course, you will only be able to build the x64 version of Nodapter.net on 64-bit machines.
