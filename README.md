@@ -78,7 +78,7 @@ A C++/CLI dll interoping between V8 and .NET.  It lets you access .NET "work" cl
 Installation
 ----------------------------
 
-From a Visual Studio Command Prompt, run:
+From a __Visual Studio Command Prompt__ (That's right, I suggest Visual C++ should be installed because it has header & lib files that you'll need), run:
 
 ```
 SET NODE_HOME=c:\node\v0.8.15
